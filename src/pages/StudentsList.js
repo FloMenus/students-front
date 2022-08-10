@@ -15,16 +15,15 @@ function StudentsList() {
     const response = await fetch("http://localhost:8000/students");
     const data = await response.json();
     setStudents(data);
-    console.loge(students);
   };
 
   return (
     <div>
-        <nav>
-            <Link to="/">List</Link>
-            <Link to="/form">Form</Link>
-        </nav>
-        <h1>Students List</h1>
+      <nav>
+        <Link to="/">List</Link>
+        <Link to="/form">Form</Link>
+      </nav>
+      <h1>Students List</h1>
       <ul>
         {students.map((student) => (
           <li key={student.id}>

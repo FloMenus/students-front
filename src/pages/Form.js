@@ -5,7 +5,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function Form() {
-    let navigate = useNavigate();
+  let navigate = useNavigate();
   const [students, setStudents] = useState([]);
   const params = useParams();
 
@@ -22,19 +22,20 @@ function Form() {
   const postStudent = async (e) => {
     e.preventDefault();
 
-    const student = { name: e.target.children[0].value} ;
+    const student = { name: e.target.children[0].value };
 
     const request = await fetch("http://localhost:8000/students", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(
-        student,
-      ),
+      body: JSON.stringify(student),
     });
     const response = await request.json();
-    navigate(`../success/${student.name}`, { replace: true });
+    console.log(request.status);
+    if (request.status === 200) {
+      navigate(`../success/${student.name}`, { replace: true });
+    }
   };
 
   return (
