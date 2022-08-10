@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Form() {
+    let navigate = useNavigate();
   const [students, setStudents] = useState([]);
   const params = useParams();
 
@@ -19,6 +21,7 @@ function Form() {
 
   const postStudent = async (e) => {
     e.preventDefault();
+
     const student = { name: e.target.children[0].value} ;
 
     const request = await fetch("http://localhost:8000/students", {
@@ -30,8 +33,8 @@ function Form() {
         student,
       ),
     });
-
     const response = await request.json();
+    navigate(`../success/${student.name}`, { replace: true });
   };
 
   return (
